@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from .views import LightListView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', LightListView.as_view(), name=list_light)
+
 ]

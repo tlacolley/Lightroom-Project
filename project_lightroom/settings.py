@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'light',
 ]
 
 MIDDLEWARE = [
@@ -120,5 +122,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_FILE_DIR = (
-        os.path.join(PATH_DIR='/node_modules')
+        os.path.join(BASE_DIR, '/node_modules')
 )
