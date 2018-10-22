@@ -15,31 +15,27 @@
             <h1> Lightroom Project </h1>
 
         </header>
-        <h2 class="title"> All lights </h2>
 <main>
-    {% for light in object_list%}
+    <h2 class="title"> All lights </h2>
+    {% for objLight in lights%}
 
-    <div class="light light{{ light.state }}">
-        <h2> Light # {{ light.id }}</h2>
-        {% if light.state == 'ON' %}
+    <div class="light light{{ objLight.light.state }}">
+        <h2> Light # {{ objLight.light.id }}</h2>
+        {% if objLight.light.state == 'ON' %}
         <i class="far fa-lightbulb"></i>
 
         {% else %}
         <i class="fas fa-lightbulb"></i>
         {% endif %}
-        <h3> State : {{ light.get_state_display }}</h3>
+        <h3> State : {{ objLight.light.get_state_display }}</h3>
 
         <div class="checkbox">
-            <form class="" action="index.html" method="post">
-
-            {% if light.state == 'ON' %}
-            <input id="toggle{{ light.id }}" class="toggle" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" type="checkbox" >
-
-            {% else %}
-            <input id="toggle{{ light.id }}" class="toggle" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" type="checkbox" >
-            {% endif %}
+            <form class="lightForm" action="{% url 'list_switch' objLight.light.id %}" method="post">{% csrf_token %}
+            {{objLight.form}}
+            <button type="submit" name="button">ok</button>
 
         </form>
+
         </div>
 </div>
 
@@ -60,13 +56,7 @@
     $(document).ready(function(){
         var btnToggle = $('.toggle');
         var divLight = $('.light');
-
-        btnToggle.click(function(){
-
-            var btnId = self.id
-
-            console.log(btnId);
-        })
+        var lightForm = $('.lightForm');
 
 
 
