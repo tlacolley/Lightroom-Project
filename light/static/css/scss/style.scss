@@ -11,9 +11,13 @@ header{
     h1{
         font-size: 4rem;
         margin: 0;
+
+        // animation-duration: 6s;
+        // animation-name: lightEffect;
+
+        text-shadow: 0 0 0.2em rgba(221,250,0,1), 0 0 0.2em rgba(221,250,0,1),0 0 0.2em rgba(221,250,0,1);
         color: white;
-        text-shadow: 0 0 0.2em rgba(221,250,0,1), 0 0 0.2em rgba(221,250,0,1),
-        0 0 0.2em rgba(221,250,0,1)
+
     }
 }
 .title{
@@ -44,9 +48,34 @@ main{
 
     }
     .lightON{
-        h2, i{
-
+        h2{
+            text-shadow: 0 0 0.2em rgba(221,250,0,1), 0 0 0.2em rgba(221,250,0,1),0 0 0.2em rgba(221,250,0,1);
+            color: white;
+        }
+         i{
+        animation-duration: 2s;
+        animation-name: lightEffect;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        // animation-direction: alternate;
         text-shadow: 0 0 0.2em rgba(221,250,0,1), 0 0 0.2em rgba(221,250,0,1),0 0 0.2em rgba(221,250,0,1);
+        color: white;
+        }
+        @keyframes lightEffect{
+            from{
+                text-shadow: none;
+                color: black;
+                transform: rotate(0deg);
+            }
+            50%{
+                text-shadow: 0 0 0.2em rgba(221,250,0,1), 0 0 0.2em rgba(221,250,0,1),0 0 0.2em rgba(221,250,0,1);
+                color: white;
+
+            }
+            to{
+                color: black;
+                transform: rotate(360deg);
+            }
         }
     }
 }

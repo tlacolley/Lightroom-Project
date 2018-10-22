@@ -2,7 +2,11 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from django.urls import reverse
+from django.urls import reverse_lazy
+
+import json
+from django.http import HttpResponse, JsonResponse
+
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView
 from .models import Light
@@ -30,7 +34,13 @@ class LightListView(ListView):
 
 class LightSwitchView(UpdateView):
     model = Light
-    fields = ["state"]
+    form_class = LightForm
+    success_url = reverse_lazy('list_light')
 
-    def get_success_url(self):
-        return reverse('list_light')
+    def form_valid(self, form):
+        self.object = form.save()
+        print self.object.state
+        return JsonResponse({
+            "id" : self.object.id,
+            "state" : self.object.state,
+        })

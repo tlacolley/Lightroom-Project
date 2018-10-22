@@ -12,14 +12,14 @@
     </head>
     <body>
         <header>
-            <h1> Lightroom Project </h1>
+             <h1><i class="iTitle fab fa-galactic-senate"></i> Lightroom Project </h1>
 
         </header>
 <main>
     <h2 class="title"> All lights </h2>
     {% for objLight in lights%}
 
-    <div class="light light{{ objLight.light.state }}">
+    <div id="light{{objLight.light.id}}" class="light light{{ objLight.light.state }}">
         <h2> Light # {{ objLight.light.id }}</h2>
         {% if objLight.light.state == 'ON' %}
         <i class="far fa-lightbulb"></i>
@@ -27,7 +27,7 @@
         {% else %}
         <i class="fas fa-lightbulb"></i>
         {% endif %}
-        <h3> State : {{ objLight.light.get_state_display }}</h3>
+        <h3 id="state{{objLight.light.id}}"> State : {{ objLight.light.get_state_display }}</h3>
 
         <div class="checkbox">
             <form class="lightForm" action="{% url 'list_switch' objLight.light.id %}" method="post">{% csrf_token %}
@@ -58,11 +58,38 @@
         var divLight = $('.light');
         var lightForm = $('.lightForm');
 
+        lightForm.submit(function(event){
+            event.preventDefault()
+            var url = $(this).attr('action');
+            var data = $(this).serializeArray();
+            // console.log(data);
+            $.ajax({
+                url: url,
+                data: data,
+                method: "post",
+                success: function(response){
+                    // console.log(response);
+                    console.log(response.state);
+                    if(response.state == "ON"){
+                        $('#light'+response.id).attr('class', 'light lightON' );
+                        $('#state'+response.id).html("State : Allume")
+
+                    }
+                    else{
+                        $('#light'+response.id).attr('class', 'light')
+                        $('#state'+response.id).html("State : Eteint")
+
+                    }
+
+                }
+            })
+
+        });
 
 
 
 
-    })
+    });
 
 
 </script>
