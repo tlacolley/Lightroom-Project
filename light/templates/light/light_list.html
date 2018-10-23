@@ -17,21 +17,30 @@
         </header>
 <main>
     <h2 class="title"> All lights </h2>
+    <form class="formAllLight" action="{% url 'list_light' %}" method="post">{% csrf_token %}
+        <label for="id_state">ON/OFF</label>
+        {{allLight.state}}
+        <button type="submit" name="button">GO</button>
+    </form>
     {% for objLight in lights%}
 
-    <div id="light{{objLight.light.id}}" class="light light{{ objLight.light.state }}">
+    <div id="light{{objLight.light.id}}" class="light light{{ objLight.light.state }} lightColor{{objLight.light.color}}">
         <h2> Light # {{ objLight.light.id }}</h2>
         {% if objLight.light.state == 'ON' %}
-        <i class="far fa-lightbulb"></i>
+        <i id="icon{{objLight.light.id}}" class="far fa-lightbulb"></i>
 
         {% else %}
-        <i class="fas fa-lightbulb"></i>
+        <i id="icon{{objLight.light.id}}" class="fas fa-lightbulb"></i>
         {% endif %}
         <h3 id="state{{objLight.light.id}}"> State : {{ objLight.light.get_state_display }}</h3>
 
         <div class="checkbox">
             <form class="lightForm" action="{% url 'list_switch' objLight.light.id %}" method="post">{% csrf_token %}
-            {{objLight.form}}
+            <label for="id_state">ON/OFF</label>
+            {{objLight.form.state}}
+            <label for="id_color">Color</label>
+            {{objLight.form.color}}
+
             <button type="submit" name="button">ok</button>
 
         </form>
@@ -57,6 +66,7 @@
         var btnToggle = $('.toggle');
         var divLight = $('.light');
         var lightForm = $('.lightForm');
+        var formAllLight = $('.formAllLight');
 
         lightForm.submit(function(event){
             event.preventDefault()
@@ -69,20 +79,56 @@
                 method: "post",
                 success: function(response){
                     // console.log(response);
-                    console.log(response.state);
                     if(response.state == "ON"){
+
                         $('#light'+response.id).attr('class', 'light lightON' );
                         $('#state'+response.id).html("State : Allume")
-
+                        $('#icon'+response.id).attr('class', 'far fa-lightbulb')
                     }
                     else{
                         $('#light'+response.id).attr('class', 'light')
                         $('#state'+response.id).html("State : Eteint")
+                        $('#icon'+response.id).attr('class', 'fas fa-lightbulb')
+                    }
+                    if(response.color){
+                        $('#light'+response.id).attr('class', 'light lightColor'+response.color+' light'+response.state)
 
                     }
 
                 }
             })
+
+        });
+        formAllLight.submit(function(event){
+            event.preventDefault();
+            var url = $(this).attr('action');
+            var data = $(this).serializeArray();
+            $.ajax({
+                url: url,
+                data: data,
+                method: "post",
+                success : function(response){
+                    if(response.state == "ON"){
+                        {% for light in object_list %}
+                        $('#light{{light.id}}').attr('class', 'light lightON lightColor{{light.color}}' );
+                        $('#state{{light.id}}').html("State : Allume")
+                        $('#icon{{light.id}}').attr('class', 'far fa-lightbulb')
+                        {% endfor %}
+                    }
+                    else{
+                        {% for light in object_list %}
+                        $('#light{{light.id}}').attr('class', 'light lightOFF lightColor{{light.color}}' );
+                        $('#state{{light.id}}').html("State : Eteint")
+                        $('#icon{{light.id}}').attr('class', 'fas fa-lightbulb')
+                        {% endfor %}
+                    }
+
+
+                }
+
+            })
+
+
 
         });
 

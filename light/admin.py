@@ -7,9 +7,9 @@ from .models import Light
 # Register your models here.
 
 class LightAdmin(admin.ModelAdmin):
-    list_display = ('id','state')
-    list_editable = ('state',)
-    list_filter = ('state',)
+    list_display = ('id','state','color')
+    list_editable = ('state','color')
+    list_filter = ('state','color')
 
 
 

@@ -20,7 +20,7 @@ header{
 
     }
 }
-.title{
+.title, .formAllLight{
     text-align: center;
     grid-column: 1/5;
     text-decoration: underline;
@@ -45,11 +45,22 @@ main{
             margin: 10% 0;
             font-size: 10rem;
         }
+        .lightForm{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            button{
+                margin-top: 5%;
+                width: 50%;
+            }
+        }
 
     }
+
     .lightON{
         h2{
-            text-shadow: 0 0 0.2em rgba(221,250,0,1), 0 0 0.2em rgba(221,250,0,1),0 0 0.2em rgba(221,250,0,1);
+            text-shadow: 0 0 0.2em white, 0 0 0.2em white,0 0 0.2em white;
             color: white;
         }
          i{
@@ -58,7 +69,7 @@ main{
         animation-iteration-count: infinite;
         animation-timing-function: linear;
         // animation-direction: alternate;
-        text-shadow: 0 0 0.2em rgba(221,250,0,1), 0 0 0.2em rgba(221,250,0,1),0 0 0.2em rgba(221,250,0,1);
+        text-shadow: 0 0 0.2em white, 0 0 0.2em white,0 0 0.2em white;
         color: white;
         }
         @keyframes lightEffect{
@@ -68,7 +79,7 @@ main{
                 transform: rotate(0deg);
             }
             50%{
-                text-shadow: 0 0 0.2em rgba(221,250,0,1), 0 0 0.2em rgba(221,250,0,1),0 0 0.2em rgba(221,250,0,1);
+                text-shadow: 0 0 0.2em white, 0 0 0.2em white,0 0 0.2em white;
                 color: white;
 
             }
@@ -77,5 +88,67 @@ main{
                 transform: rotate(360deg);
             }
         }
+    }
+    .lightColorRED{
+        h2{
+            text-shadow: 0 0 0.2em red , 0 0 0.2em red ,0 0 0.2em red ;
+            color: red;
+        }
+        i{
+            text-shadow: 0 0 0.2em red, 0 0 0.2em red,0 0 0.2em red;
+            color:red;
+        }
+    }
+    .lightColorYELLOW{
+        h2{
+            text-shadow: 0 0 0.2em rgba(221,250,0,1) , 0 0 0.2em rgba(221,250,0,1) ,0 0 0.2em rgba(221,250,0,1) ;
+            color: rgba(221,250,0,1);
+        }
+        i{
+            text-shadow: 0 0 0.2em rgba(221,250,0,1), 0 0 0.2em rgba(221,250,0,1),0 0 0.2em rgba(221,250,0,1);
+            color:rgba(221,250,0,1);
+        }
+    }
+    .lightColorBLUE{
+        h2{
+            text-shadow: 0 0 0.2em blue , 0 0 0.2em blue,0 0 0.2em blue ;
+            color: blue;
+        }
+        i{
+            text-shadow: 0 0 0.2em blue, 0 0 0.2em blue,0 0 0.2em blue;
+            color:blue;
+        }
+    }
+    .lightColorGREEN{
+        h2{
+            text-shadow: 0 0 0.2em green , 0 0 0.2em green,0 0 0.2em green ;
+            color: green;
+        }
+        i{
+            text-shadow: 0 0 0.2em green, 0 0 0.2em green,0 0 0.2em green;
+            color:green;
+        }
+    }
+    .lightColorPURPLE{
+        h2{
+            text-shadow: 0 0 0.2em purple , 0 0 0.2em purple,0 0 0.2em purple ;
+            color: purple;
+        }
+        i{
+            text-shadow: 0 0 0.2em purple, 0 0 0.2em purple,0 0 0.2em purple;
+            color:purple;
+        }
+    }
+
+    .lightOFF{
+        h2{
+            text-shadow: none;
+            color:white;
+        }
+         i{
+             animation-name:none;
+             text-shadow:none;
+             color:black;
+         }
     }
 }
